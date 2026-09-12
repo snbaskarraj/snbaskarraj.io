@@ -1,0 +1,808 @@
+<title>Baskarraj S N</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+<style>
+  :root {
+    --paper:      #F4F5F1;
+    --surface:    #FFFFFF;
+    --ink:        #0E1F24;
+    --ink-soft:   #35474B;
+    --muted:      #5C6B6B;
+    --rule:       #D5DAD2;
+    --rule-soft:  #E5E8E1;
+    --accent:     #0B6E63;
+    --accent-dim: #0B6E6314;
+    --signal:     #A85B18;
+
+    --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+    --body:    "Source Serif 4", Georgia, "Times New Roman", serif;
+    --mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+    --gutter: clamp(20px, 5vw, 72px);
+    --rail: 188px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #0B1417;
+      --surface:    #111E22;
+      --ink:        #E6EBE5;
+      --ink-soft:   #BDC8C4;
+      --muted:      #8CA09C;
+      --rule:       #24373B;
+      --rule-soft:  #1B2C30;
+      --accent:     #4FBFAE;
+      --accent-dim: #4FBFAE1A;
+      --signal:     #E29457;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:      #0B1417;
+    --surface:    #111E22;
+    --ink:        #E6EBE5;
+    --ink-soft:   #BDC8C4;
+    --muted:      #8CA09C;
+    --rule:       #24373B;
+    --rule-soft:  #1B2C30;
+    --accent:     #4FBFAE;
+    --accent-dim: #4FBFAE1A;
+    --signal:     #E29457;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+  a:focus-visible,
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-inline: var(--gutter);
+  }
+
+  /* ── top bar ───────────────────────────────────────────── */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter: saturate(1.4) blur(8px);
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-block: 11px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+  .topbar-name { font-weight: 600; color: var(--ink); text-decoration: none; white-space: nowrap; }
+  .topbar-nav { display: flex; flex-wrap: wrap; gap: 18px; }
+  .topbar-nav a { color: var(--muted); text-decoration: none; }
+  .topbar-nav a:hover { color: var(--accent); }
+  @media (max-width: 720px) { .topbar-nav { display: none; } }
+
+  /* ── hero ──────────────────────────────────────────────── */
+  .hero { padding-block: clamp(40px, 7vw, 78px) 8px; }
+
+  .hero-top {
+    display: grid;
+    grid-template-columns: 1fr 132px;
+    gap: clamp(24px, 5vw, 56px);
+    align-items: start;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 18px;
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(42px, 8.2vw, 82px);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .role {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(18px, 2.5vw, 23px);
+    line-height: 1.32;
+    letter-spacing: -0.01em;
+    color: var(--ink-soft);
+    margin: 20px 0 0;
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+
+  .portrait {
+    width: 132px;
+    height: 132px;
+    max-width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    filter: grayscale(0.15);
+    border: 1px solid var(--rule);
+  }
+
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    margin-top: 30px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+  }
+  .contact a, .contact span {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 13px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--ink-soft);
+    background: var(--surface);
+  }
+  .contact a:hover { border-color: var(--accent); color: var(--accent); }
+  .contact .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); flex: none;
+  }
+
+  /* ── metric band ───────────────────────────────────────── */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(146px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border-block: 1px solid var(--rule);
+    margin-top: clamp(40px, 6vw, 64px);
+  }
+  .metric {
+    background: var(--paper);
+    padding: 20px 18px 22px;
+  }
+  .metric b {
+    display: block;
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(21px, 3vw, 27px);
+    letter-spacing: -0.02em;
+    color: var(--signal);
+    font-variant-numeric: tabular-nums;
+  }
+  .metric span {
+    display: block;
+    margin-top: 7px;
+    font-size: 13.5px;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+
+  /* ── sections ──────────────────────────────────────────── */
+  section { padding-block: clamp(46px, 7vw, 76px); border-bottom: 1px solid var(--rule-soft); }
+  section:last-of-type { border-bottom: 0; }
+
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 34px;
+  }
+  .sec-head h2 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(24px, 3.4vw, 33px);
+    letter-spacing: -0.022em;
+    line-height: 1.1;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .sec-head .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .lede {
+    font-size: clamp(18px, 2.2vw, 20.5px);
+    line-height: 1.58;
+    max-width: 64ch;
+    margin: 0 0 24px;
+  }
+  .lede strong { font-weight: 600; color: var(--ink); }
+  p.body { max-width: 64ch; color: var(--ink-soft); margin: 0 0 18px; }
+
+  /* competency chips */
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 28px; }
+  .chips li {
+    list-style: none;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.01em;
+    color: var(--ink-soft);
+    padding: 5px 11px;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    background: var(--surface);
+  }
+
+  /* ── deliverables ──────────────────────────────────────── */
+  .cases { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+  .case { background: var(--paper); padding: 26px clamp(20px, 2.4vw, 28px) 28px; display: flex; flex-direction: column; }
+  .case-where {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 12px;
+  }
+  .case h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 19.5px;
+    line-height: 1.26;
+    letter-spacing: -0.015em;
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+  .case p { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--ink-soft); }
+  .outcome {
+    margin-top: 18px;
+    padding: 10px 0 10px 14px;
+    border-left: 2px solid var(--accent);
+    background: var(--accent-dim);
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .outcome em { font-style: normal; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; font-size: 10.5px; display: block; margin-bottom: 4px; }
+
+  /* ── experience timeline ───────────────────────────────── */
+  .job {
+    display: grid;
+    grid-template-columns: var(--rail) 1fr;
+    gap: clamp(20px, 4vw, 48px);
+    padding-block: 30px;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .job:first-of-type { border-top: 0; padding-top: 0; }
+
+  .job-rail { font-family: var(--mono); font-size: 12px; line-height: 1.65; color: var(--muted); }
+  .job-rail .dates { color: var(--ink); font-weight: 500; display: block; }
+  .job-rail .place { display: block; margin-top: 5px; }
+  .job-rail .now {
+    display: inline-block;
+    margin-top: 9px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 3px;
+    padding: 2px 7px;
+  }
+
+  .job h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 21px;
+    letter-spacing: -0.018em;
+    line-height: 1.24;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .job .org { font-family: var(--mono); font-size: 12.5px; color: var(--accent); margin: 7px 0 14px; letter-spacing: 0.02em; }
+  .job ul { margin: 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 11px; max-width: 68ch; }
+  .job li { position: relative; padding-left: 20px; font-size: 15.5px; line-height: 1.55; color: var(--ink-soft); }
+  .job li::before {
+    content: "";
+    position: absolute;
+    left: 2px; top: 0.66em;
+    width: 7px; height: 1px;
+    background: var(--muted);
+  }
+  .job li strong { font-weight: 600; color: var(--ink); }
+
+  @media (max-width: 700px) {
+    .job { grid-template-columns: 1fr; gap: 14px; }
+  }
+
+  /* ── builds ────────────────────────────────────────────── */
+  .builds { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 22px; }
+  .build { border-top: 2px solid var(--ink); padding-top: 16px; }
+  .build h3 { font-family: var(--display); font-weight: 600; font-size: 17.5px; letter-spacing: -0.012em; margin: 0 0 8px; line-height: 1.25; }
+  .build .score {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--signal);
+    font-variant-numeric: tabular-nums;
+    display: block;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+  .build p { margin: 0; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+
+  /* ── skills ────────────────────────────────────────────── */
+  .skills { display: flex; flex-direction: column; gap: 24px; }
+  .skill-row {
+    display: grid;
+    grid-template-columns: var(--rail) 1fr;
+    gap: clamp(20px, 4vw, 48px);
+    align-items: start;
+  }
+  .skill-row h3 {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 3px 0 0;
+  }
+  .skill-row p { margin: 0; font-size: 15.5px; line-height: 1.62; color: var(--ink-soft); max-width: 70ch; }
+  @media (max-width: 700px) { .skill-row { grid-template-columns: 1fr; gap: 8px; } }
+
+  /* ── credentials ───────────────────────────────────────── */
+  .creds { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: clamp(28px, 4vw, 52px); }
+  .cred-group h3 {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 16px;
+  }
+  .cred-group ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 13px; }
+  .cred-group li { font-size: 15.5px; line-height: 1.45; color: var(--ink-soft); }
+  .cred-group li b { display: block; font-weight: 600; color: var(--ink); }
+  .cred-group li span { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+  /* ── footer ────────────────────────────────────────────── */
+  footer { padding-block: clamp(52px, 8vw, 88px) 44px; }
+  .cta h2 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(28px, 5vw, 48px);
+    letter-spacing: -0.028em;
+    line-height: 1.04;
+    margin: 0 0 20px;
+    max-width: 18ch;
+    text-wrap: balance;
+  }
+  .cta p { max-width: 54ch; color: var(--ink-soft); margin: 0 0 28px; }
+  .colophon {
+    margin-top: 44px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule-soft);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 560px) {
+    .hero-top { grid-template-columns: 1fr; }
+    .portrait { width: 96px; height: 96px; }
+    .sec-head { flex-direction: column; gap: 6px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+
+  @media print {
+    :root {
+      --paper: #fff; --surface: #fff; --ink: #111; --ink-soft: #333;
+      --muted: #555; --rule: #bbb; --rule-soft: #ddd;
+      --accent: #0B6E63; --accent-dim: transparent; --signal: #8a4a12;
+    }
+    .topbar { display: none; }
+    section, .job, .case { break-inside: avoid; }
+    body { font-size: 11pt; }
+  }
+</style>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="topbar-name" href="#top">Baskarraj S N</a>
+    <nav class="topbar-nav">
+      <a href="#deliverables">Deliverables</a>
+      <a href="#experience">Experience</a>
+      <a href="#builds">AI Builds</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+
+  <div class="hero">
+    <div class="hero-top">
+      <div>
+        <p class="eyebrow">Engineering Leadership · Data Platforms · Applied &amp; Agentic AI</p>
+        <h1>Baskarraj S N</h1>
+        <p class="role">Senior Engineering Manager &amp; Director of Engineering</p>
+        <div class="contact">
+          <span><i class="dot"></i>Open to new roles</span>
+          <a href="mailto:snbaskar@gmail.com">snbaskar@gmail.com</a>
+          <a href="tel:+919703801932">+91 97038 01932</a>
+          <a href="https://www.linkedin.com/in/baskarraj-sengali-b8973bb" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/snbaskarraj" target="_blank" rel="noopener">GitHub</a>
+          <span>Bengaluru, India</span>
+        </div>
+      </div>
+      <img class="portrait" src="portrait.jpg" alt="Baskarraj S N" width="132" height="132">
+    </div>
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><b>22+</b><span>Years in software engineering</span></div>
+    <div class="metric"><b>9+</b><span>Years leading engineers and engineering managers</span></div>
+    <div class="metric"><b>30+</b><span>Engineer organisation led at Walmart Global Tech</span></div>
+    <div class="metric"><b>10,000+</b><span>Engineers served by the platform I directed</span></div>
+    <div class="metric"><b>61→85%</b><span>Answer accuracy lift on a production RAG platform</span></div>
+    <div class="metric"><b>99.999%</b><span>Availability held on multi-tenant Kubernetes services</span></div>
+  </div>
+
+  <section id="about">
+    <div class="sec-head">
+      <h2>What I do</h2>
+      <span class="tag">Positioning</span>
+    </div>
+    <p class="lede">I take ideas from prototype to production under real operational, security and regulatory constraints — and I stay hands-on in the architecture while carrying the roadmap, the hiring plan and the executive narrative.</p>
+    <p class="body">A player-coach across 22+ years of software engineering and 9+ years of people leadership, most recently running a 13-engineer organisation across four pods in India and the US, and before that a 30+ engineer organisation at Walmart Global Tech through engineering managers and senior engineers.</p>
+    <p class="body">My work sits where data engineering meets applied AI: governed agent layers on the Model Context Protocol, retrieval systems with evaluation harnesses wired into CI/CD as release gates, and lakehouse platforms engineers actually adopt. Secure by design and privacy by design are not add-ons — they come from long delivery inside banking, card payments and healthcare control environments.</p>
+    <ul class="chips">
+      <li>Agentic AI &amp; MCP architecture</li>
+      <li>Evals as release gates</li>
+      <li>Human-in-the-loop governance</li>
+      <li>RAG &amp; LLM serving optimisation</li>
+      <li>AI lifecycle, MLOps &amp; LLMOps</li>
+      <li>Lakehouse &amp; streaming platforms</li>
+      <li>Prototype to production incubation</li>
+      <li>Security &amp; privacy by design</li>
+      <li>AI economics &amp; cost-per-token</li>
+      <li>Developing engineering managers</li>
+      <li>Budget, capacity &amp; vendor strategy</li>
+      <li>Executive storytelling</li>
+    </ul>
+  </section>
+
+  <section id="deliverables">
+    <div class="sec-head">
+      <h2>Signature deliverables</h2>
+      <span class="tag">What shipped, and what it moved</span>
+    </div>
+    <div class="cases">
+
+      <article class="case">
+        <p class="case-where">Nutanix · Enterprise AI &amp; Data Platform</p>
+        <h3>A governed agent layer on the Model Context Protocol</h3>
+        <p>Designed and shipped a four-server agent layer over catalog, query, policy and metadata services: tool contracts, identity propagated per call, deterministic tools wherever an LLM must not be in the loop, fully audited invocations and human approval on every write path.</p>
+        <div class="outcome"><em>Outcome</em>Taken from MVP to a shared internal service other product teams build on, under a versioning and deprecation contract.</div>
+      </article>
+
+      <article class="case">
+        <p class="case-where">Nutanix · Natural-language analytics</p>
+        <h3>Retrieval that earned its way into production</h3>
+        <p>Shipped a natural-language interface over enterprise data by building a layered context specification — business questions, table and column semantics across ~1,500 columns, curated KPI definitions and benchmarked reference queries — rather than tuning prompts. RAG over vector databases on self-hosted vLLM inference, with retrieval-quality metrics as CI/CD release gates.</p>
+        <div class="outcome"><em>Outcome</em>61% → 85% answer accuracy, 200+ active business users.</div>
+      </article>
+
+      <article class="case">
+        <p class="case-where">Nutanix · Responsible AI</p>
+        <h3>Permission-aware GenAI document ingestion</h3>
+        <p>Incubated ingestion of PDFs, audio and video into RAG with per-user OAuth2, tokens held behind a vault abstraction, incremental sync and query-time access control — then carried it through Legal review before any wider rollout. Set the responsible-AI operating standard with Legal, Security and Governance: no regulated content to third-party endpoints, entitlement-scoped retrieval, Apache Ranger and Zero-Trust policy.</p>
+        <div class="outcome"><em>Outcome</em>Long-retention audit logging built for external examination; audit evidence produced on demand.</div>
+      </article>
+
+      <article class="case">
+        <p class="case-where">Nutanix · Privacy by design</p>
+        <h3>Tokenisation for installed-base telemetry</h3>
+        <p>Partnered with Legal on a mandated programme that obfuscated device and customer identifiers before data ever reached the lake, using vault-backed identifier mapping and a controlled reverse-mapping API. Led the secure architecture review of the lakehouse with Product Security leadership, covering data classification, trust boundaries, zone isolation, encryption and agentic threat vectors.</p>
+        <div class="outcome"><em>Outcome</em>Privacy controls enforced upstream of the lake, not bolted on after.</div>
+      </article>
+
+      <article class="case">
+        <p class="case-where">Nutanix · Fleet reporting migration</p>
+        <h3>Validated before scaling — 294,000 nodes on Iceberg and Trino</h3>
+        <p>When the relational path could no longer complete full-population queries, I proved fleet hardware reporting on Iceberg and Trino through a proof of concept first, then migrated reporting across the fleet. Owned the non-functional requirements throughout: SLOs, observability, on-call, and the root-cause analysis and replacement design after a P1 pipeline incident.</p>
+        <div class="outcome"><em>Outcome</em>294,000 nodes reporting; 99.999% availability held on multi-tenant Kubernetes.</div>
+      </article>
+
+      <article class="case">
+        <p class="case-where">Walmart Global Tech · Unified Data Platform</p>
+        <h3>A developer platform 10,000+ engineers chose to use</h3>
+        <p>Directed a cloud-agnostic Unified Data Platform across AWS, GCP, Azure and on-premises, delivered as a product with self-service ingestion, prebuilt connectors, SDKs and secure high-throughput ingestion APIs — judged purely on adoption and support burden. Delivered an Iceberg-based system of record with multi-region failover and audit compliance.</p>
+        <div class="outcome"><em>Outcome</em>Deployment time down 40%, pipeline latency down 25%.</div>
+      </article>
+
+      <article class="case">
+        <p class="case-where">Nutanix · AI economics</p>
+        <h3>Cost per token owned as an engineering metric</h3>
+        <p>Built GPU capacity and cost-per-token models for self-hosted inference versus API serving, a consumption cost model that justified retiring a licensed integration stack, and build-versus-buy analysis carried through Finance. Also owned the annual vendor statement of work and resource plan for lakehouse and GenAI delivery.</p>
+        <div class="outcome"><em>Outcome</em>Migration to native pipelines against an agreed run-rate target.</div>
+      </article>
+
+      <article class="case">
+        <p class="case-where">TSYS · PCI-regulated card payments</p>
+        <h3>Mainframe systems brought into a modern data platform</h3>
+        <p>Led real-time change data capture from DB2, IMS and VSAM mainframe sources into Kafka with Avro enrichment and tokenisation under PCI DSS control, feeding a multi-zone data lake on HDFS, HBase and Solr.</p>
+        <div class="outcome"><em>Outcome</em>Legacy core systems integrated without loosening a single payment-card control.</div>
+      </article>
+
+      <article class="case">
+        <p class="case-where">FedEx Supply Chain · CASCADE</p>
+        <h3>Customs clearance optimisation at 400,000+ shipments</h3>
+        <p>Led the technical architecture for a team of 100 on CASCADE, a customs clearance optimisation platform. Worked the discovery honestly — 141 candidate features narrowed to 45 big-data analytics use cases that justified build — then delivered on AWS S3, EMR and Redshift with Spark, Kafka, Python, Scala and Tableau.</p>
+        <div class="outcome"><em>Outcome</em>400,000+ shipments handled; 45 analytics use cases taken from 141 candidates.</div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head">
+      <h2>Experience</h2>
+      <span class="tag">2004 — present</span>
+    </div>
+
+    <article class="job">
+      <div class="job-rail">
+        <span class="dates">Jun 2023 – Present</span>
+        <span class="place">Bengaluru, India<br>&amp; San Jose, CA</span>
+        <span class="now">13 engineers · 4 pods</span>
+      </div>
+      <div>
+        <h3>Senior Manager, Engineering — Enterprise Data Platform &amp; AI</h3>
+        <p class="org">Nutanix</p>
+        <ul>
+          <li>Owned product, roadmap and team for the enterprise AI and data platform across four lean pods in India and the US — sequencing for value with business stakeholders, defending scope, quality, cost and speed trade-offs with data in executive architecture forums, and staying hands-on in design reviews.</li>
+          <li>Established <strong>evaluation as the quality standard</strong>: offline regression suites scoring grounding, faithfulness and task success as release gates; prompt, index and model versioning; staged rollout with telemetry feeding the next iteration.</li>
+          <li>Ran the build–measure–learn loop in practice — pilots with live internal teams, adoption telemetry reshaping the roadmap, and features retired when the numbers did not support them.</li>
+          <li>Made <strong>AI-assisted development standard practice</strong>: rolled out AI code generation, review and unit-test generation under written accountability standards with human review required, measured on cycle time and defect escape rather than tool adoption — then published the patterns and guardrails for other engineering groups.</li>
+          <li>Owned the hiring bar, calibration and succession; <strong>promoted four senior engineers into lead roles</strong> owning named platform areas.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job">
+      <div class="job-rail">
+        <span class="dates">Sep 2021 – Jun 2023</span>
+        <span class="place">Sunnyvale, CA, USA</span>
+        <span class="now">30+ engineers</span>
+      </div>
+      <div>
+        <h3>Senior Engineering Manager II — Global Data Analytics Platform</h3>
+        <p class="org">Walmart Global Tech</p>
+        <ul>
+          <li>Led a 30+ engineer organisation through engineering managers and senior engineers across US and India pods; ran hiring loops, performance and career growth, and <strong>mentored engineers into engineering manager roles</strong>.</li>
+          <li>Architected a cloud-agnostic Spark framework run as a managed internal service — multi-cluster high availability, auto-healing, live upgrades without disrupting running workloads, GitOps delivery and staged global rollouts.</li>
+          <li>Built streaming and batch ingestion engines on Kafka, Apache Beam, Spark Structured Streaming and Airflow with CDC connectors, schema registries, lineage, reconciliation, SLIs/SLOs and PII controls built in.</li>
+          <li>Raised the engineering productivity bar across pods with design and code review standards, test coverage as a release gate, CI/CD and Infrastructure as Code — tracking deployment frequency, lead time, change failure rate and MTTR per pod.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job">
+      <div class="job-rail">
+        <span class="dates">Oct 2019 – Sep 2021</span>
+        <span class="place">Sunnyvale, CA, USA</span>
+        <span class="now">10,000+ users</span>
+      </div>
+      <div>
+        <h3>Senior Engineering Manager I — Unified Data Platform</h3>
+        <p class="org">Walmart Global Tech</p>
+        <ul>
+          <li>Directed a cloud-agnostic Unified Data Platform used by <strong>10,000+ engineers</strong> across AWS, GCP, Azure and on-premises, delivered as a product with self-service ingestion and processing, taken from first release through organisation-wide adoption.</li>
+          <li>Cut deployment time 40% and pipeline latency 25% with SDKs and workbench tooling that abstracted cloud and cluster complexity away from engineering teams.</li>
+          <li>Delivered an Iceberg-based system of record with multi-region failover and audit compliance, with metadata, lineage and schema registry embedded across the platform.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job">
+      <div class="job-rail">
+        <span class="dates">Mar 2019 – Oct 2019</span>
+        <span class="place">Washington, DC, USA</span>
+      </div>
+      <div>
+        <h3>Functional &amp; Industry Analytics Manager, Big Data</h3>
+        <p class="org">Accenture</p>
+        <ul>
+          <li>Delivered HPE's enterprise analytics platform end to end in a client-facing model — Salesforce-to-Hive integration, Kafka clickstream pipelines and Spark/Scala processing for installed-base data — then transitioned downstream analytics off the legacy stack with the incumbent team.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job">
+      <div class="job-rail">
+        <span class="dates">Jun 2017 – Feb 2019</span>
+        <span class="place">Columbus, GA, USA</span>
+        <span class="now">PCI DSS</span>
+      </div>
+      <div>
+        <h3>Big Data &amp; Analytics Engineering Manager</h3>
+        <p class="org">TSYS</p>
+        <ul>
+          <li>Integrated legacy mainframe systems into a modern data platform: real-time CDC from DB2, IMS and VSAM into Kafka with Avro enrichment and tokenisation for PCI DSS-compliant card payments, feeding a multi-zone data lake on HDFS, HBase and Solr.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job">
+      <div class="job-rail">
+        <span class="dates">Jul 2004 – Jun 2017</span>
+        <span class="place">India, UK,<br>South Africa, USA</span>
+      </div>
+      <div>
+        <h3>Earlier roles — banking platforms, healthcare analytics &amp; core systems</h3>
+        <p class="org">HSBC Global Technology · CDPHP · FedEx Supply Chain · Nedbank · HCL · BT Group</p>
+        <ul>
+          <li><strong>HSBC Global Technology (9 years):</strong> built enterprise data platforms on Hortonworks and Cloudera across AWS and Azure with Spark, Scala, Java and Python under banking regulatory controls, leading distributed teams across India, the United Kingdom and South Africa.</li>
+          <li><strong>HSBC Finance Transformation Platform:</strong> delivered the European rollout (UK, 2008) and then the US implementation (2009), standardising finance technology across HSBC operations with strengthened controls, process automation and improved reporting.</li>
+          <li><strong>FedEx Supply Chain — CASCADE:</strong> led technical architecture for a 100-person team on a customs clearance optimisation platform handling 400,000+ shipments, on AWS S3, EMR, Redshift, Spark, Kafka, Python, Scala and Tableau.</li>
+          <li><strong>CDPHP:</strong> ran AWS analytics infrastructure on EMR, S3 and Redshift with tokenisation frameworks for compliant processing of regulated healthcare data; built predictive models in R and SAS for risk scoring and segmentation.</li>
+          <li>Further delivery across mortgage systems, supply chain automation, card systems conversion and fault management platforms.</li>
+          <li><strong>Core banking and telecom platforms</strong> on COBOL, JCL, DB2, VSAM and CICS: improved batch efficiency 15% through DB2 query tuning and job optimisation on long-lived production systems.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section id="builds">
+    <div class="sec-head">
+      <h2>Hands-on AI builds</h2>
+      <span class="tag">Built personally, graded independently</span>
+    </div>
+    <p class="lede">I do not lead AI work from slides. These were built by hand, evaluated, and in one case shipped with a documented negative result rather than a flattering one.</p>
+    <div class="builds">
+      <article class="build">
+        <h3>TechMart agentic assistant</h3>
+        <span class="score">98.68%</span>
+        <p>Agentic AI programme capstone, 2026. Built with LangChain and LangGraph, deployed to Hugging Face Spaces. Scored 600/600 across six graded builds.</p>
+      </article>
+      <article class="build">
+        <h3>NormIQ RAG system</h3>
+        <span class="score">93.3%</span>
+        <p>IISc Applied GenAI capstone. 93.3% accuracy and 90.5% RAGAS faithfulness, reached through iterative, evaluation-driven design.</p>
+      </article>
+      <article class="build">
+        <h3>LLM serving optimisation</h3>
+        <span class="score">62×</span>
+        <p>IISc coursework. Benchmarked Qwen3-4B on a Tesla T4 for a 62× throughput improvement — and documented speculative decoding as a negative result rather than shipping it.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-head">
+      <h2>Technical depth</h2>
+      <span class="tag">Hands-on, not supervisory</span>
+    </div>
+    <div class="skills">
+      <div class="skill-row">
+        <h3>Agentic AI &amp; LLM</h3>
+        <p>Model Context Protocol (MCP) · agent orchestration and tool-calling · multi-agent and single-agent design trade-offs · LangChain · LangGraph · RAG and graph RAG · embeddings, chunking and re-ranking · vector databases (Milvus, Qdrant, Pinecone) · prompt and context engineering · evaluation harnesses (RAGAS), grounding and faithfulness scoring · guardrails and human-in-the-loop approvals · vLLM and self-hosted inference · LoRA and PEFT · GPU capacity and cost-per-token economics</p>
+      </div>
+      <div class="skill-row">
+        <h3>Software engineering</h3>
+        <p>Python · Java · Scala · SQL · Go · C/C++ · JavaScript and Node.js · REST APIs and FastAPI · microservices · API and contract design · system design, testing and code review</p>
+      </div>
+      <div class="skill-row">
+        <h3>Data &amp; cloud-native</h3>
+        <p>Spark · Kafka · Apache Iceberg · Delta Lake · Trino · Snowflake · Airflow · Apache Beam · Kubernetes (EKS, GKE, AKS) · Docker · Helm · ArgoCD · Istio · Terraform · AWS, Azure and Google Cloud · Prometheus, Grafana and OpenTelemetry · SLOs, error budgets and incident command</p>
+      </div>
+      <div class="skill-row">
+        <h3>Security &amp; governance</h3>
+        <p>Secure architecture review · role-based and fine-grained access control (Apache Ranger) · OAuth2 · HashiCorp Vault · encryption at rest and in transit · tokenisation · PII and PHI classification · Zero-Trust multi-tenancy · audit logging and retention · delivery under PCI DSS, banking and healthcare controls</p>
+      </div>
+      <div class="skill-row">
+        <h3>Leadership</h3>
+        <p>Product roadmap ownership and value sequencing · executive narrative and stakeholder alignment · hiring and interview-loop design across geographies · coaching, calibration and career development · developing engineering managers and tech leads · cost modelling, run-rate ownership and build-versus-buy with Finance · vendor SoW governance · DORA metrics</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="credentials">
+    <div class="sec-head">
+      <h2>Education &amp; certifications</h2>
+      <span class="tag">Credentials</span>
+    </div>
+    <div class="creds">
+      <div class="cred-group">
+        <h3>Education</h3>
+        <ul>
+          <li><b>PG Diploma, AI/ML, Quantum Communication &amp; Next-Generation Wireless</b><span>IIT Delhi · 2025–2026 · 27 credits</span></li>
+          <li><b>Post Graduate Diploma in Management (MBA), Finance &amp; Marketing</b><span>University of Wales, United Kingdom · 2002–2003</span></li>
+          <li><b>Bachelor of Engineering, Computer Science</b><span>University of Madras, Chennai · 1997–2001</span></li>
+        </ul>
+      </div>
+      <div class="cred-group">
+        <h3>AI &amp; ML certifications</h3>
+        <ul>
+          <li><b>Professional Certificate, Agentic AI &amp; Applications</b><span>IIT Madras Pravartak · 2025–2026</span></li>
+          <li><b>PG Advanced Certification, AI &amp; Autonomous Systems</b><span>Indian Institute of Science, Bengaluru · 2025</span></li>
+          <li><b>Applied Generative AI</b><span>Indian Institute of Science, Bengaluru · 2024</span></li>
+          <li><b>Post Graduate Program, AI &amp; Machine Learning</b><span>University of Texas at Austin · 2023–2024</span></li>
+          <li><b>Responsible Generative AI</b><span>Microsoft · 2024</span></li>
+        </ul>
+      </div>
+      <div class="cred-group">
+        <h3>Engineering &amp; data</h3>
+        <ul>
+          <li><b>Advanced Certification, Software Engineering for Cloud, Blockchain &amp; IoT</b><span>IIT Madras</span></li>
+          <li><b>IoT: Devices &amp; Networking</b><span>IIT Madras · Sep 2023</span></li>
+          <li><b>Data Engineering, Big Data &amp; ML on Google Cloud</b><span>Google Cloud Specialization · 6 courses · Jun 2019</span></li>
+          <li><b>SAS Certified Predictive Modeler</b><span>SAS Institute · Jan 2016</span></li>
+          <li><b>Lean Six Sigma Green Belt</b><span>HSBC · Nov 2015</span></li>
+        </ul>
+      </div>
+      <div class="cred-group">
+        <h3>Languages</h3>
+        <ul>
+          <li><b>English · Tamil · Hindi</b><span>Telugu · Kannada · Marathi</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="cta">
+      <h2>Let's talk about what you need shipped.</h2>
+      <p>Open to Director and Senior Engineering Manager roles in data platforms, applied AI and agentic systems — in Bengaluru, remote, or relocating.</p>
+      <div class="contact">
+        <a href="mailto:snbaskar@gmail.com">snbaskar@gmail.com</a>
+        <a href="tel:+919703801932">+91 97038 01932</a>
+        <a href="https://www.linkedin.com/in/baskarraj-sengali-b8973bb" target="_blank" rel="noopener">linkedin.com/in/baskarraj-sengali</a>
+        <a href="https://github.com/snbaskarraj" target="_blank" rel="noopener">github.com/snbaskarraj</a>
+      </div>
+    </div>
+    <div class="colophon">
+      <span>Baskarraj S N · Bengaluru, India</span>
+      <span>Last updated September 2026</span>
+    </div>
+  </footer>
+
+</main>
