@@ -343,6 +343,15 @@
   .lede strong { font-weight: 600; color: var(--ink); }
   p.body { max-width: 64ch; color: var(--ink-soft); margin: 0 0 18px; }
 
+  code {
+    font-family: var(--mono);
+    font-size: 0.87em;
+    background: var(--sunk);
+    border: 1px solid var(--rule-soft);
+    border-radius: 3px;
+    padding: 1px 5px;
+  }
+
   .chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 28px 0 0; padding: 0; }
   .chips li {
     list-style: none;
@@ -494,6 +503,101 @@
   .job li::before { content: ""; position: absolute; left: 2px; top: 0.66em; width: 7px; height: 1px; background: var(--muted); }
   .job li strong { font-weight: 600; color: var(--ink); }
   @media (max-width: 700px) { .job { grid-template-columns: 1fr; gap: 14px; } }
+
+  /* ── featured build ────────────────────────────────────── */
+  .feature {
+    border: 1px solid var(--rule);
+    background: var(--surface);
+    border-radius: 4px;
+    padding: clamp(22px, 3vw, 34px);
+    margin-bottom: 42px;
+  }
+  .feature-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .flag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--signal);
+    border: 1px solid var(--signal);
+    border-radius: 3px;
+    padding: 4px 10px;
+    white-space: nowrap;
+  }
+  .repo-link {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-2);
+    padding-bottom: 1px;
+    word-break: break-all;
+  }
+  .repo-link:hover { border-bottom-color: var(--accent); }
+  .feature h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(22px, 3.2vw, 30px);
+    letter-spacing: -0.024em;
+    line-height: 1.12;
+    margin: 0 0 14px;
+    text-wrap: balance;
+  }
+  .feature p { margin: 0 0 16px; color: var(--ink-soft); max-width: 68ch; font-size: 16px; }
+  .feature p:last-of-type { margin-bottom: 0; }
+  .feature p strong { font-weight: 600; color: var(--ink); }
+
+  .feature-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin: 26px 0;
+  }
+  .fact { background: var(--surface); padding: 15px 16px 17px; }
+  .fact b {
+    display: block;
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    color: var(--signal);
+    font-variant-numeric: tabular-nums;
+  }
+  .fact span { display: block; margin-top: 6px; font-size: 12.5px; line-height: 1.35; color: var(--muted); }
+
+  .diagram-scroll { overflow-x: auto; margin: 26px 0 4px; }
+  .diagram { display: block; width: 100%; min-width: 720px; height: auto; }
+  .diagram .box { fill: var(--paper); stroke: var(--rule); stroke-width: 1; }
+  .diagram .box-accent { fill: var(--accent-dim); stroke: var(--accent); stroke-width: 1; }
+  .diagram .flow { stroke: var(--muted); stroke-width: 1.2; fill: none; }
+  .diagram .ttl { font-family: var(--display); font-size: 13.5px; font-weight: 600; fill: var(--ink); }
+  .diagram .sub { font-family: var(--mono); font-size: 10.5px; fill: var(--muted); }
+  .diagram .tool { font-family: var(--mono); font-size: 11px; fill: var(--ink-soft); }
+  .diagram .note { font-family: var(--mono); font-size: 10px; fill: var(--accent); letter-spacing: .06em; }
+
+  .caveat {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: var(--muted);
+    border-left: 2px solid var(--rule);
+    padding-left: 14px;
+    margin: 22px 0 0;
+    max-width: 70ch;
+  }
 
   /* ── builds ────────────────────────────────────────────── */
   .builds { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; }
@@ -739,6 +843,7 @@
     <div class="metric"><b>10,000+</b><span>Engineers served by the platform I directed</span></div>
     <div class="metric"><b>61→85%</b><span>Answer accuracy lift on a production RAG platform</span></div>
     <div class="metric"><b>99.999%</b><span>Availability held on multi-tenant Kubernetes</span></div>
+    <div class="metric"><b>60 min</b><span>Governed agentic app built end to end in a live interview</span></div>
   </div>
 
   <div class="wrap">
@@ -1016,9 +1121,93 @@
     <section id="builds">
       <div class="sec-head">
         <h2>Hands-on AI builds</h2>
-        <span class="tag">Built personally, graded independently</span>
+        <span class="tag">Built personally, scored independently</span>
       </div>
       <p class="lede">I do not lead AI work from slides. These were built by hand, evaluated, and in one case shipped with a documented negative result rather than a flattering one.</p>
+
+      <div class="feature">
+        <div class="feature-head">
+          <span class="flag">Live interview exercise · 60 minutes</span>
+          <a class="repo-link" href="https://github.com/snbaskarraj/everpure-agentic-analyst" target="_blank" rel="noopener">github.com/snbaskarraj/everpure-agentic-analyst →</a>
+        </div>
+        <h3>Everpure Agentic Analyst — a governed analytics agent, built end to end under the clock</h3>
+        <p>A conversational agent that answers questions about business metrics and business events, built in a single 60-minute live coding exercise: chat UI, LLM backend, a tool layer that queries and analyses the data, and answers grounded in it that can be audited line by line. Schema-agnostic ingestion means the interviewers' CSVs drop into <code>data/</code> and nothing else changes.</p>
+        <p><strong>The model plans; the tools compute.</strong> No number in an answer comes from the language model — totals come from DuckDB, and slopes, z-scores and percentage changes from numpy. SQL is validated to a single read-only SELECT, row-capped and logged. A write is only ever a <em>proposal</em>: the ledger holds it as pending until a named human clicks Approve, and on the LangGraph backend the graph itself freezes mid-turn before the write node.</p>
+
+        <div class="feature-facts">
+          <div class="fact"><b>60 min</b><span>Live exercise, end to end</span></div>
+          <div class="fact"><b>309</b><span>Offline checks, no API key needed</span></div>
+          <div class="fact"><b>7</b><span>Tools behind one agent loop</span></div>
+          <div class="fact"><b>3</b><span>Interchangeable orchestrators</span></div>
+          <div class="fact"><b>Level 2</b><span>Tool-using agent, bounded autonomy</span></div>
+        </div>
+
+        <div class="diagram-scroll">
+          <svg class="diagram" viewBox="0 0 1000 330" role="img" aria-label="Architecture: a question enters an agent loop implemented three ways; the loop calls seven tools; read tools hit an in-memory read-only DuckDB while write tools mint a pending entry in a ledger that requires human approval; the loop returns an answer with an evidence trace and per-turn budgets.">
+            <!-- question -->
+            <rect class="box" x="24" y="26" width="180" height="46" rx="3"></rect>
+            <text class="ttl" x="40" y="54">Question</text>
+
+            <!-- agent loop -->
+            <rect class="box-accent" x="24" y="104" width="300" height="104" rx="3"></rect>
+            <text class="ttl" x="40" y="132" fill="var(--accent)">Agent loop</text>
+            <text class="sub" x="40" y="152">native · LangGraph · LangChain</text>
+            <text class="sub" x="40" y="170">system prompt carries the live schema</text>
+            <text class="sub" x="40" y="188">budgets: 10 steps · 12s · 20k tokens</text>
+
+            <!-- answer -->
+            <rect class="box" x="24" y="240" width="300" height="66" rx="3"></rect>
+            <text class="ttl" x="40" y="266">Answer + evidence trace</text>
+            <text class="sub" x="40" y="286">every call, argument, SQL and row shown</text>
+
+            <!-- tools -->
+            <rect class="box" x="384" y="26" width="290" height="280" rx="3"></rect>
+            <text class="sub" x="400" y="48" fill="var(--accent)">SEVEN TOOLS</text>
+            <text class="tool" x="400" y="80">run_sql</text>
+            <text class="tool" x="400" y="112">analyze_trend</text>
+            <text class="tool" x="400" y="144">measure_change</text>
+            <text class="tool" x="400" y="176">detect_anomalies</text>
+            <text class="tool" x="400" y="208">find_events</text>
+            <text class="tool" x="400" y="240">retrieve_context</text>
+            <text class="tool" x="400" y="272" fill="var(--signal)">propose_write</text>
+
+            <!-- stores -->
+            <rect class="box" x="734" y="80" width="242" height="72" rx="3"></rect>
+            <text class="ttl" x="750" y="106">DuckDB</text>
+            <text class="sub" x="750" y="126">in-memory · read-only</text>
+            <text class="sub" x="750" y="142">validated SQL, row-capped</text>
+
+            <rect class="box" x="734" y="196" width="242" height="90" rx="3"></rect>
+            <text class="ttl" x="750" y="222">Write ledger</text>
+            <text class="sub" x="750" y="242">pending until Approve</text>
+            <text class="note" x="750" y="264">HUMAN IN THE LOOP</text>
+            <text class="sub" x="750" y="280">LangGraph freezes the turn here</text>
+
+            <!-- flows -->
+            <path class="flow" d="M114 72 L114 104" marker-end="url(#ar)"></path>
+            <path class="flow" d="M324 140 L384 140" marker-end="url(#ar)"></path>
+            <path class="flow" d="M384 172 L324 172" marker-end="url(#ar)"></path>
+            <text class="sub" x="332" y="134">call</text>
+            <text class="sub" x="332" y="192">result</text>
+            <path class="flow" d="M674 116 L734 116" marker-end="url(#ar)"></path>
+            <path class="flow" d="M674 272 L704 272 L704 241 L734 241" marker-end="url(#ar)"></path>
+            <path class="flow" d="M174 208 L174 240" marker-end="url(#ar)"></path>
+
+            <defs>
+              <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--muted)"></path>
+              </marker>
+            </defs>
+          </svg>
+        </div>
+
+        <p>Validation splits the way the problem does. <strong>309 deterministic checks</strong> cover schema inference, SQL guardrails (DROP, DELETE, UPDATE, stacked statements and PRAGMA all rejected), aggregation semantics — revenue sums, gross margin averages, because summing nine segment margins gives 640% — the anomaly maths, the write ledger and the budgets. The non-deterministic half is a golden-question rubric scoring tool choice, groundedness and refusal, run by CI and the live UI through the same scorers, so the two cannot disagree about what "grounded" means. Two golden questions exist purely to test refusal, including one answerable from world knowledge that the agent must decline anyway.</p>
+
+        <p>One finding worth the room: the first anomaly detector scored raw month-over-month change and flagged 17 of 36 months on a series containing a single real incident — enterprise revenue peaks every quarter-end, so "moved a lot since last month" just describes the business. Estimating a seasonal profile from the data and scoring the residual with a median/MAD robust z-score cut it to five flags, all inside the real incident window.</p>
+
+        <p class="caveat">Built with AI-assisted engineering — the same practice I rolled out across my team at Nutanix, under written accountability standards with human review required on generated code. The repository is public; the commit history and contributor list show exactly how it was made.</p>
+      </div>
+
       <div class="builds">
         <article class="build">
           <h3>TechMart agentic assistant</h3>
