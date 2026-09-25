@@ -396,8 +396,14 @@
     display: flex;
     flex-direction: column;
     transition: background .2s ease;
+    scroll-margin-top: 72px;
   }
   .case:hover { background: var(--surface); }
+  .case:target,
+  .case:target:hover {
+    background: var(--accent-dim);
+    box-shadow: inset 0 0 0 2px var(--accent);
+  }
   .case-where {
     font-family: var(--mono);
     font-size: 11px;
@@ -416,7 +422,8 @@
     text-wrap: balance;
     transition: color .2s ease;
   }
-  .case:hover h3 { color: var(--accent); }
+  .case:hover h3,
+  .case:target h3 { color: var(--accent); }
   .case p { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--ink-soft); }
   .outcome {
     margin-top: 18px;
@@ -959,15 +966,15 @@
           <div class="outcome"><em>Outcome</em>Long-retention audit logging built for external examination; audit evidence produced on demand.</div>
         </article>
 
-        <article class="case">
+        <article class="case" id="telemetry-privacy">
           <p class="case-where">Nutanix · Privacy by design</p>
           <h3>Tokenisation for installed-base telemetry</h3>
           <p>Partnered with Legal on a mandated programme that obfuscated device and customer identifiers before data ever reached the lake, using vault-backed identifier mapping and a controlled reverse-mapping API. Led the secure architecture review of the lakehouse with Product Security leadership, covering data classification, trust boundaries, zone isolation, encryption and agentic threat vectors.</p>
           <div class="outcome"><em>Outcome</em>Privacy controls enforced upstream of the lake, not bolted on after.</div>
         </article>
 
-        <article class="case">
-          <p class="case-where">Nutanix · Fleet reporting migration</p>
+        <article class="case" id="fleet-telemetry">
+          <p class="case-where">Nutanix · Fleet telemetry &amp; reliability</p>
           <h3>Validated before scaling — 294,000 nodes on Iceberg and Trino</h3>
           <p>When the relational path could no longer complete full-population queries, I proved fleet hardware reporting on Iceberg and Trino through a proof of concept first, then migrated reporting across the fleet. Owned the non-functional requirements throughout: SLOs, observability, on-call, and the root-cause analysis and replacement design after a P1 pipeline incident.</p>
           <div class="outcome"><em>Outcome</em>294,000 nodes reporting; 99.999% availability held on multi-tenant Kubernetes.</div>
